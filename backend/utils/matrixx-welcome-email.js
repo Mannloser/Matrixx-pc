@@ -1,7 +1,7 @@
 // matrixx-welcome-email.js
 // Usage: pass `getWelcomeEmailHtml(email)` to nodemailer's `html` field
 
-export function getWelcomeEmailHtml(username = "Builder") {
+function getWelcomeEmailHtml(username = "Builder") {
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
