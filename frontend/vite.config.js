@@ -9,5 +9,5 @@ export default defineConfig({
       '/api': 'http://localhost:5001'
     }
   },
-  base: './Matrixx-pc',
+  base: '/Matrixx-pc/',
 })
