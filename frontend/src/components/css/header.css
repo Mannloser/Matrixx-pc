@@ -1,0 +1,218 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap');
+
+
+
+/* ── TOP NAV ── */
+.top-nav {
+    background: var(--navy);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 48px;
+    height: 64px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    font-family: var(--font-body);
+}
+
+.logo {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.6rem;
+    color: var(--white);
+    letter-spacing: -0.5px;
+    text-decoration: none;
+}
+
+.logo span {
+    color: var(--sky);
+}
+
+.top-nav-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.btn {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 0.875rem;
+    padding: 8px 22px;
+    border-radius: 6px;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease;
+}
+
+.btn-ghost {
+    background: transparent;
+    border: 1.5px solid rgba(200, 217, 230, 0.45);
+    color: var(--sky);
+}
+
+.btn-ghost:hover {
+    background: rgba(200, 217, 230, 0.1);
+    border-color: var(--sky);
+}
+
+.btn-primary {
+    background: var(--sky);
+    color: var(--navy);
+}
+
+.btn-primary:hover {
+    background: var(--white);
+}
+
+/* ── SEMI NAV ── */
+.semi-nav {
+    background: var(--white);
+    border-bottom: 1.5px solid var(--sky);
+    display: flex;
+    align-items: stretch;
+    padding: 0 48px;
+    height: 48px;
+    position: sticky;
+    top: 64px;
+    z-index: 99;
+    gap: 4px;
+    font-family: var(--font-body);
+}
+
+.semi-nav-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.semi-nav-link {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--navy);
+    text-decoration: none;
+    padding: 0 18px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border-bottom: 2.5px solid transparent;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+    cursor: pointer;
+    background: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    font-family: var(--font-body);
+}
+
+.semi-nav-link:hover,
+.semi-nav-link.active {
+    color: var(--teal);
+    border-bottom-color: var(--teal);
+    background: rgba(93, 124, 141, 0.06);
+}
+
+.chevron {
+    width: 10px;
+    height: 10px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(45deg);
+    margin-top: -3px;
+    transition: transform 0.2s;
+    display: inline-block;
+}
+
+.chevron.open {
+    transform: rotate(-135deg);
+    margin-top: 3px;
+}
+
+/* ── DROPDOWN ── */
+.dropdown {
+    position: absolute;
+    top: calc(100% + 1.5px);
+    left: 0;
+    background: var(--white);
+    border: 1.5px solid var(--sky);
+    border-radius: 10px;
+    min-width: 230px;
+    padding: 8px 0;
+    box-shadow: 0 16px 40px rgba(47, 65, 86, 0.14);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-6px);
+    transition: opacity 0.18s ease, transform 0.18s ease;
+    z-index: 200;
+}
+
+.dropdown.open {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateY(0);
+}
+
+.dropdown-group-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--teal);
+    text-transform: uppercase;
+    padding: 12px 18px 4px;
+    font-family: var(--font-body);
+}
+
+.dropdown-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 18px;
+    font-size: 0.875rem;
+    color: var(--navy);
+    text-decoration: none;
+    transition: background 0.12s;
+    cursor: pointer;
+    font-family: var(--font-body);
+}
+
+.dropdown-link:hover {
+    background: var(--beige);
+    color: var(--teal);
+}
+
+.dropdown-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    background: var(--sky);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+}
+
+.dropdown-divider {
+    height: 1px;
+    background: var(--sky);
+    margin: 6px 12px;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+    .top-nav {
+        padding: 0 20px;
+    }
+
+    .semi-nav {
+        padding: 0 20px;
+        overflow-x: auto;
+    }
+
+    .logo {
+        font-size: 1.3rem;
+    }
+}

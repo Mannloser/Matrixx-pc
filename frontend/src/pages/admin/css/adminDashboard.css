@@ -1,0 +1,441 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600&display=swap');
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes countUp {
+    from {
+        opacity: 0;
+        transform: translateY(8px) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+/* ── WELCOME BANNER ── */
+.db-banner {
+    background: var(--navy);
+    border-radius: 20px;
+    padding: 32px 36px;
+    margin-bottom: 28px;
+    position: relative;
+    overflow: hidden;
+    animation: fadeUp 0.4s ease;
+}
+
+.db-banner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(200, 217, 230, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200, 217, 230, 0.04) 1px, transparent 1px);
+    background-size: 36px 36px;
+    pointer-events: none;
+}
+
+.db-banner::after {
+    content: '';
+    position: absolute;
+    top: -80px;
+    right: -60px;
+    width: 380px;
+    height: 380px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.25) 0%, transparent 65%);
+    pointer-events: none;
+}
+
+.db-banner-inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.db-banner-eyebrow {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(200, 217, 230, 0.45);
+    margin-bottom: 6px;
+}
+
+.db-banner-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.7rem;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.5px;
+    margin-bottom: 5px;
+}
+
+.db-banner-sub {
+    font-size: 0.82rem;
+    color: rgba(200, 217, 230, 0.45);
+}
+
+.db-banner-badge {
+    background: rgba(99, 102, 241, 0.15);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    color: #a5b4fc;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    border-radius: 100px;
+    white-space: nowrap;
+}
+
+/* ── STAT CARDS ── */
+.db-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 28px;
+}
+
+.db-stat {
+    background: var(--white);
+    border: 1px solid var(--admin-border);
+    border-radius: 16px;
+    padding: 22px 20px;
+    animation: fadeUp 0.4s ease both;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.db-stat:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(47, 65, 86, 0.1);
+}
+
+.db-stat-accent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    border-radius: 16px 16px 0 0;
+}
+
+.db-stat-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    margin-bottom: 14px;
+}
+
+.db-stat-val {
+    font-family: 'Syne', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--navy);
+    line-height: 1;
+    letter-spacing: -1px;
+    margin-bottom: 4px;
+    animation: countUp 0.5s ease both;
+}
+
+.db-stat-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 2px;
+}
+
+.db-stat-sub {
+    font-size: 0.7rem;
+    color: var(--teal);
+}
+
+/* ── QUICK ACTIONS ── */
+.db-actions {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-bottom: 28px;
+}
+
+.db-action {
+    background: var(--white);
+    border: 1px solid var(--admin-border);
+    border-radius: 14px;
+    padding: 18px 16px;
+    text-decoration: none;
+    display: block;
+    transition: all 0.16s;
+    animation: fadeUp 0.4s ease both;
+    position: relative;
+    overflow: hidden;
+}
+
+.db-action:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(47, 65, 86, 0.1);
+}
+
+.db-action-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    position: absolute;
+    top: 14px;
+    right: 14px;
+}
+
+.db-action-icon {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.db-action-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 4px;
+}
+
+.db-action-desc {
+    font-size: 0.7rem;
+    color: var(--teal);
+    line-height: 1.4;
+}
+
+/* ── BOTTOM GRID ── */
+.db-bottom {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 20px;
+}
+
+/* ── RECENT BUILDS TABLE ── */
+.db-card {
+    background: var(--white);
+    border: 1px solid var(--admin-border);
+    border-radius: 16px;
+    overflow: hidden;
+    animation: fadeUp 0.5s ease both;
+}
+
+.db-card-head {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--admin-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.db-card-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--navy);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.db-live-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #10b981;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+    }
+
+    50% {
+        box-shadow: 0 0 0 6px rgba(16, 185, 129, 0.05);
+    }
+}
+
+.db-user-cell {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.db-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--navy), var(--teal));
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 800;
+    flex-shrink: 0;
+}
+
+.db-user-name {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--navy);
+}
+
+.db-user-sub {
+    font-size: 0.68rem;
+    color: var(--teal);
+    margin-top: 1px;
+}
+
+.db-empty {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--teal);
+    font-size: 0.82rem;
+}
+
+.db-empty-icon {
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+}
+
+/* ── POPULAR PARTS ── */
+.db-part-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--admin-border);
+    transition: background 0.12s;
+}
+
+.db-part-row:last-child {
+    border-bottom: none;
+}
+
+.db-part-row:hover {
+    background: #f8fafc;
+}
+
+.db-part-rank {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: rgba(47, 65, 86, 0.2);
+    width: 16px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.db-part-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: var(--beige);
+    border: 1px solid var(--admin-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+}
+
+.db-part-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.db-part-name {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--navy);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.db-part-cat {
+    font-size: 0.65rem;
+    color: var(--teal);
+    margin-top: 1px;
+}
+
+.db-part-count {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--navy);
+    background: var(--beige);
+    border: 1px solid var(--admin-border);
+    border-radius: 6px;
+    padding: 3px 8px;
+    white-space: nowrap;
+}
+
+/* Skeleton loading */
+.db-skeleton {
+    background: linear-gradient(90deg, #f0f2f5 25%, #e8eaed 50%, #f0f2f5 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 8px;
+}
+
+@media (max-width:1100px) {
+    .db-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .db-actions {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .db-bottom {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width:600px) {
+    .db-stats {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .db-actions {
+        grid-template-columns: 1fr 1fr;
+    }
+}

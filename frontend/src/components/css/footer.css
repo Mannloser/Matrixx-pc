@@ -1,0 +1,236 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap');
+
+
+
+/* ── CTA BAND ── */
+.cta-band {
+    background: var(--navy);
+    padding: 80px 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    position: relative;
+    overflow: hidden;
+    font-family: var(--font-body);
+}
+
+.cta-band::before {
+    content: '';
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(93, 124, 141, 0.35) 0%, transparent 70%);
+    right: -80px;
+    top: -180px;
+    pointer-events: none;
+}
+
+.cta-band-left {
+    position: relative;
+    z-index: 1;
+}
+
+.cta-band-title {
+    font-family: var(--font-display);
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: var(--white);
+    letter-spacing: -1px;
+    line-height: 1.1;
+    max-width: 480px;
+}
+
+.cta-band-sub {
+    color: var(--sky);
+    font-size: 0.95rem;
+    margin-top: 12px;
+    font-weight: 300;
+}
+
+.cta-band-right {
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+}
+
+.btn-cta-white {
+    background: var(--white);
+    color: var(--navy);
+    padding: 16px 36px;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-display);
+    transition: all 0.2s ease;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.btn-cta-white:hover {
+    background: var(--sky);
+    transform: scale(1.03);
+}
+
+/* ── FOOTER ── */
+.site-footer {
+    background: #1e2d3d;
+    font-family: var(--font-body);
+    color: rgba(200, 217, 230, 0.65);
+    padding: 60px 72px 32px;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid rgba(200, 217, 230, 0.12);
+}
+
+.footer-brand-logo {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: var(--white);
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 14px;
+}
+
+.footer-brand-logo span {
+    color: var(--sky);
+}
+
+.footer-brand-desc {
+    font-size: 0.85rem;
+    line-height: 1.65;
+    color: rgba(200, 217, 230, 0.55);
+    max-width: 260px;
+}
+
+.footer-socials {
+    display: flex;
+    gap: 10px;
+    margin-top: 22px;
+}
+
+.social-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: rgba(200, 217, 230, 0.08);
+    border: 1px solid rgba(200, 217, 230, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    text-decoration: none;
+    color: inherit;
+}
+
+.social-btn:hover {
+    background: rgba(200, 217, 230, 0.18);
+    border-color: rgba(200, 217, 230, 0.35);
+    transform: translateY(-2px);
+}
+
+.footer-col-title {
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--sky);
+    margin-bottom: 18px;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.footer-links li a {
+    font-size: 0.875rem;
+    color: rgba(200, 217, 230, 0.6);
+    text-decoration: none;
+    transition: color 0.15s;
+}
+
+.footer-links li a:hover {
+    color: var(--sky);
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 28px;
+    font-size: 0.78rem;
+    color: rgba(200, 217, 230, 0.35);
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.footer-bottom-links {
+    display: flex;
+    gap: 20px;
+}
+
+.footer-bottom-links a {
+    color: rgba(200, 217, 230, 0.35);
+    text-decoration: none;
+    transition: color 0.15s;
+}
+
+.footer-bottom-links a:hover {
+    color: var(--sky);
+}
+
+.footer-brand-name {
+    color: var(--sky);
+    font-weight: 600;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+    .cta-band {
+        flex-direction: column;
+        padding: 60px 24px;
+        text-align: center;
+    }
+
+    .cta-band-title {
+        font-size: 1.9rem;
+        max-width: 100%;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+    }
+
+    .site-footer {
+        padding: 48px 24px 24px;
+    }
+}
+
+@media (max-width: 560px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+    }
+}

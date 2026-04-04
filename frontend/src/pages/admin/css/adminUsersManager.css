@@ -1,0 +1,511 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600&display=swap');
+
+/* ── TOAST ── */
+.um-toast {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 18px;
+    border-radius: 12px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    box-shadow: 0 8px 32px rgba(47, 65, 86, 0.18);
+    animation: umToastIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    border: 1px solid;
+    font-family: var(--font-body);
+}
+
+.um-toast.success {
+    background: #dcfce7;
+    color: #15803d;
+    border-color: #86efac;
+}
+
+.um-toast.error {
+    background: #fee2e2;
+    color: #dc2626;
+    border-color: #fca5a5;
+}
+
+@keyframes umToastIn {
+    from {
+        transform: translateX(120%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* ── TOOLBAR ── */
+.um-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.um-search-wrap {
+    position: relative;
+    flex: 1;
+    min-width: 200px;
+}
+
+.um-search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.5;
+    font-size: 0.8rem;
+    pointer-events: none;
+}
+
+.um-search {
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    color: var(--navy);
+    background: var(--white);
+    border: 1.5px solid var(--admin-border);
+    border-radius: 10px;
+    padding: 10px 14px 10px 34px;
+    outline: none;
+    width: 100%;
+    transition: all 0.15s;
+    box-shadow: 0 2px 6px rgba(47, 65, 86, 0.04);
+}
+
+.um-search:focus {
+    border-color: var(--teal);
+    box-shadow: 0 0 0 3px rgba(93, 124, 141, 0.08);
+}
+
+.um-role-pills {
+    display: flex;
+    gap: 8px;
+}
+
+.um-role-pill {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--teal);
+    background: var(--white);
+    border: 1.5px solid var(--admin-border);
+    border-radius: 20px;
+    padding: 7px 16px;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.um-role-pill:hover {
+    border-color: var(--teal);
+    background: rgba(93, 124, 141, 0.05);
+}
+
+.um-role-pill.on {
+    background: var(--navy);
+    color: var(--white);
+    border-color: var(--navy);
+    box-shadow: 0 4px 12px rgba(47, 65, 86, 0.15);
+}
+
+/* ── AVATAR ── */
+.um-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--teal) 100%);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(47, 65, 86, 0.12);
+}
+
+.um-user-cell {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.um-user-name {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--navy);
+    font-family: var(--font-body);
+}
+
+.um-user-email {
+    font-size: 0.72rem;
+    color: var(--teal);
+    margin-top: 2px;
+}
+
+/* ── ACTIONS ── */
+.um-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.um-btn {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 700;
+    border-radius: 8px;
+    padding: 7px 14px;
+    cursor: pointer;
+    transition: all 0.15s;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.um-btn-view {
+    background: var(--beige);
+    color: var(--navy);
+    border: 1.5px solid var(--admin-border);
+}
+
+.um-btn-view:hover {
+    border-color: var(--teal);
+    background: rgba(93, 124, 141, 0.05);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(47, 65, 86, 0.08);
+}
+
+.um-btn-delete {
+    background: #fee2e2;
+    color: #dc2626;
+    font-weight: 700;
+}
+
+.um-btn-delete:hover:not(:disabled) {
+    background: #fecaca;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(220, 38, 38, 0.12);
+}
+
+.um-btn-delete:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* ── VIEW MODAL ── */
+.um-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(47, 65, 86, 0.6);
+    backdrop-filter: blur(6px);
+    z-index: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    animation: umOverlayIn 0.2s ease;
+}
+
+@keyframes umOverlayIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.um-modal {
+    background: var(--white);
+    border-radius: 16px;
+    border: 2px solid var(--sky);
+    width: 100%;
+    max-width: 540px;
+    box-shadow: 0 32px 80px rgba(47, 65, 86, 0.22);
+    animation: umModalIn 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+    overflow: hidden;
+}
+
+@keyframes umModalIn {
+    from {
+        transform: scale(0.95) translateY(10px);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+    }
+}
+
+.um-modal-head {
+    padding: 20px 24px;
+    border-bottom: 2px solid var(--sky);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(135deg, var(--navy) 0%, rgba(47, 65, 86, 0.95) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.um-modal-head::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(200, 217, 230, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200, 217, 230, 0.05) 1px, transparent 1px);
+    background-size: 28px 28px;
+    pointer-events: none;
+}
+
+.um-modal-head-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    position: relative;
+    z-index: 1;
+}
+
+.um-modal-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(200, 217, 230, 0.2) 0%, rgba(93, 124, 141, 0.1) 100%);
+    border: 2px solid rgba(200, 217, 230, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--white);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.um-modal-name {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--white);
+    margin-bottom: 4px;
+    letter-spacing: -0.5px;
+}
+
+.um-modal-username {
+    font-size: 0.78rem;
+    color: rgba(200, 217, 230, 0.65);
+    font-family: var(--font-body);
+}
+
+.um-modal-x {
+    background: rgba(200, 217, 230, 0.1);
+    border: 1.5px solid rgba(200, 217, 230, 0.2);
+    color: rgba(200, 217, 230, 0.7);
+    border-radius: 8px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.15s;
+    position: relative;
+    z-index: 1;
+}
+
+.um-modal-x:hover {
+    background: rgba(200, 217, 230, 0.2);
+    color: var(--white);
+    border-color: rgba(200, 217, 230, 0.4);
+}
+
+.um-modal-body {
+    padding: 24px;
+}
+
+.um-modal-foot {
+    padding: 16px 24px;
+    border-top: 2px solid var(--sky);
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.um-modal-foot button {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 700;
+    border-radius: 9px;
+    padding: 11px 22px;
+    cursor: pointer;
+    border: none;
+    transition: all 0.15s;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.um-m-close {
+    background: var(--beige);
+    color: var(--navy);
+    border: 1.5px solid var(--sky);
+}
+
+.um-m-close:hover {
+    border-color: var(--teal);
+    background: rgba(93, 124, 141, 0.05);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(47, 65, 86, 0.08);
+}
+
+.um-m-save {
+    background: var(--navy);
+    color: var(--white);
+}
+
+.um-m-save:hover {
+    background: var(--teal);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(47, 65, 86, 0.15);
+}
+
+.um-m-delete {
+    background: #dc2626;
+    color: var(--white);
+}
+
+.um-m-delete:hover {
+    background: #991b1b;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.15);
+}
+
+/* Info rows inside modal */
+.um-info-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 13px 0;
+    border-bottom: 1px solid var(--sky);
+}
+
+.um-info-row:last-child {
+    border-bottom: none;
+}
+
+.um-info-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: var(--beige);
+    border: 1.5px solid var(--sky);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+}
+
+.um-info-label {
+    font-size: 0.65rem;
+    color: var(--teal);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    font-family: var(--font-body);
+}
+
+.um-info-val {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--navy);
+    margin-top: 2px;
+    font-family: var(--font-body);
+}
+
+/* ── SELECT DROPDOWN ── */
+.um-info-row select {
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    color: var(--navy);
+    background: var(--beige);
+    border: 1.5px solid var(--sky);
+    border-radius: 8px;
+    padding: 8px 12px;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-weight: 600;
+}
+
+.um-info-row select:hover {
+    border-color: var(--teal);
+}
+
+.um-info-row select:focus {
+    border-color: var(--navy);
+    box-shadow: 0 0 0 3px rgba(47, 65, 86, 0.08);
+}
+
+.um-info-row select option {
+    background: var(--white);
+    color: var(--navy);
+    padding: 4px;
+}
+
+/* Delete confirm */
+.um-danger-box {
+    background: #fff8f8;
+    border: 2px solid #fca5a5;
+    border-radius: 12px;
+    padding: 16px;
+    font-size: 0.85rem;
+    color: #dc2626;
+    line-height: 1.7;
+    font-family: var(--font-body);
+    font-weight: 500;
+}
+
+.um-danger-box strong {
+    color: #991b1b;
+    font-weight: 700;
+}
+
+/* Loading / empty */
+.um-loading {
+    text-align: center;
+    padding: 80px;
+    color: var(--teal);
+    font-size: 0.9rem;
+    font-family: var(--font-body);
+}
+
+.um-loading-icon {
+    font-size: 2.2rem;
+    margin-bottom: 14px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
