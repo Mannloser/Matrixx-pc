@@ -299,3 +299,5 @@ export function getWelcomeEmailHtml(username = "Builder") {
 </body>
 </html>`;
 }
+
+module.exports = { getWelcomeEmailHtml }
