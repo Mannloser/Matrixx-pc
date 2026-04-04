@@ -22,8 +22,6 @@ const startServer = async () => {
     try {
         await connectDB();
         app.listen(5001, () => console.log("✅ Server running on port 5001"));
-        console.log("EMAIL_USER:", process.env.MAILING_USER);
-        console.log("EMAIL_PASS:", process.env.MAILING_PASS);
     } catch (error) {
         console.error("❌ Failed to start server:", error);
         process.exit(1);
