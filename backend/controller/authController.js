@@ -33,11 +33,13 @@ const registerUser = async (req, res) => {
 
         await newUser.save();
 
-        const isSent = await sendWelcomeEmail(normalizedEmail, name);
+        sendWelcomeEmail(normalizedEmail, name)
+            .then(() => console.log("Email sent"))
+            .catch(err => console.log("Email failed:", err));
 
-        if (!isSent) {
-            console.log("Email failed but continuing...");
-        }
+        // if (!isSent) {
+        //     console.log("Email failed but continuing...");
+        // }
 
         res.json({ message: "User registered successfully" });
     } catch (err) {
