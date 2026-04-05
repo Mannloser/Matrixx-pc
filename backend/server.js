@@ -6,6 +6,7 @@ const authRoutes = require("./routes/authRoutes.js");
 const partsRoutes = require("./routes/partsRoutes.js");
 const profileRoutes = require("./routes/profileRoutes.js");
 const adminRoutes = require("./routes/adminRoutes.js");
+const prebuildRoutes = require("./routes/prebuildRoutes.js");
 require("dotenv").config();
 
 app.use(cors({
@@ -19,6 +20,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/parts", partsRoutes);
 app.use("/api/profile", profileRoutes);
 app.use("/api/admin", adminRoutes);
+app.use("/api/prebuilds", prebuildRoutes);
 
 app.get("/", (req, res) => res.send("Hello World!"));
 
