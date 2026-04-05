@@ -6,7 +6,7 @@ const authRoutes = require("./routes/authRoutes.js");
 const partsRoutes = require("./routes/partsRoutes.js");
 const profileRoutes = require("./routes/profileRoutes.js");
 const adminRoutes = require("./routes/adminRoutes.js");
-require("dotenv").config({ path: "../.env" });
+require("dotenv").config();
 
 app.use(cors());
 app.use(express.json());
