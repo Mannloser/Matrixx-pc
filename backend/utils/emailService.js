@@ -5,11 +5,13 @@ dotenv.config();
 const { getWelcomeEmailHtml } = require("./matrixx-welcome-email");
 
 const transporter = nodemailer.createTransport({
-    service: "gmail",
+    host: "smtp.gmail.com",
+    port: 587,        // 👈 IMPORTANT (not 465)
+    secure: false,    // 👈 IMPORTANT
     auth: {
         user: process.env.MAILING_USER,
-        pass: process.env.MAILING_PASS
-    }
+        pass: process.env.MAILING_PASS,
+    },
 });
 
 const sendWelcomeEmail = async (email, name) => {  // ✅ accept name
