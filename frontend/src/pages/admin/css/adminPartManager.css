@@ -116,3 +116,25 @@
     font-size: 0.8rem;
     margin-bottom: 12px;
 }
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+    .pm-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .pm-search-wrap { min-width: unset; }
+    .pm-cat-pills {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        padding-bottom: 4px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+    .pm-cat-pills::-webkit-scrollbar { display: none; }
+    .admin-form-grid-2 { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+    .pm-actions { flex-direction: column; gap: 4px; }
+    .pm-actions .admin-btn { width: 100%; justify-content: center; }
+}
