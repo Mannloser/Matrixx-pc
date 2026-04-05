@@ -121,7 +121,7 @@ function getWelcomeEmailHtml(username = "Builder") {
               <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
                 <tr>
                   <td align="center" style="padding-bottom:40px;">
-                    <a href="http://localhost:5173/"
+                    <a href="https://matrixx-pc.pages.dev/"
                       style="
                         display:inline-block;
                         background:#2F4156;
