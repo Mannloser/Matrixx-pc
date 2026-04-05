@@ -239,7 +239,7 @@ export default function PreBuildsPage() {
       setLoading(true);
       setError(null);
       try {
-        const res = await fetch("/api/admin/prebuilds", {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/prebuilds`, {
           signal: controller.signal,
         });
 
@@ -271,7 +271,7 @@ export default function PreBuildsPage() {
       prev.map(b => b.id === id ? { ...b, builds: b.builds + 1 } : b)
     );
     try {
-      await fetch(`/api/admin/prebuilds/${id}/use`, { method: "PATCH" });
+      await fetch(`${import.meta.env.VITE_API_URL}/api/admin/prebuilds/${id}/use`, { method: "PATCH" });
     } catch (err) {
       // Silently fail — counter will re-sync on next page load
       console.warn("Could not increment build count:", err);
