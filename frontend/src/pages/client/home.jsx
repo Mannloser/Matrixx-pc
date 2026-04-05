@@ -21,7 +21,7 @@ function Home() {
   useEffect(() => {
     const fetchPrebuilds = async () => {
       try {
-        const res = await fetch("/api/admin/prebuilds");
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/prebuilds`);
         if (!res.ok) throw new Error("Failed to fetch");
         const data = await res.json();
         // Pick 6 random from however many are in the DB
