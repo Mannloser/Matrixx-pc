@@ -813,6 +813,8 @@
 }
 
 /* ── RESPONSIVE ── */
+
+/* Tablet */
 @media (max-width: 900px) {
     .pb-hero {
         padding: 36px 24px 40px;
@@ -820,31 +822,179 @@
 
     .pb-hero-inner {
         grid-template-columns: 1fr;
+        gap: 28px;
     }
 
+    /* Show cats as a horizontal row instead of hiding them */
     .pb-hero-cats {
-        display: none;
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .pb-hero-cat-card {
+        padding: 14px 10px;
     }
 
     .pb-hero-title {
         font-size: 2.2rem;
+        letter-spacing: -1px;
     }
 
+    /* Stack filter bar */
     .pb-filters {
         padding: 0 20px;
+    }
+
+    .pb-filters-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+    }
+
+    .pb-filter-tabs {
+        width: 100%;
+        border-bottom: 1px solid var(--sky);
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    .pb-filter-tabs::-webkit-scrollbar {
+        display: none;
+    }
+
+    .pb-tier-filters {
+        padding: 10px 0;
+        flex-wrap: wrap;
+        gap: 6px;
     }
 
     .pb-grid-wrap {
         padding: 28px 20px 0;
     }
 
+    /* 2-col grid on tablet */
     .pb-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Modal full-width */
+    .pb-modal-overlay {
+        padding: 0;
+        align-items: flex-end;
     }
 
     .pb-modal {
         max-width: 100%;
         max-height: 92vh;
+        border-radius: 20px 20px 0 0;
+        border-bottom: none;
+    }
+}
+
+/* Mobile */
+@media (max-width: 560px) {
+    .pb-hero {
+        padding: 28px 16px 32px;
+    }
+
+    .pb-hero-title {
+        font-size: 1.9rem;
+        letter-spacing: -0.8px;
+        word-break: break-word;
+        overflow-wrap: break-word;
+    }
+
+    .pb-hero-desc {
+        font-size: 0.88rem;
+    }
+
+    .pb-hero-stats {
+        gap: 16px;
+    }
+
+    .pb-hero-stat-val {
+        font-size: 1.3rem;
+    }
+
+    /* 2x2 grid of cat cards stays but smaller */
+    .pb-hero-cats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+
+    .pb-hero-cat-emoji {
+        font-size: 1.3rem;
+    }
+
+    .pb-hero-cat-label {
+        font-size: 0.68rem;
+    }
+
+    .pb-filters {
+        padding: 0 16px;
+    }
+
+    .pb-filter-tab {
+        padding: 14px 12px;
+        font-size: 0.78rem;
+    }
+
+    .pb-tier-pill {
+        font-size: 0.68rem;
+        padding: 5px 11px;
+    }
+
+    .pb-grid-wrap {
+        padding: 20px 16px 0;
+    }
+
+    /* Single column on small phones */
+    .pb-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Modal improvements */
+    .pb-modal-header {
+        padding: 18px 16px 14px;
+        gap: 12px;
+    }
+
+    .pb-modal-emoji {
+        font-size: 2.2rem;
+    }
+
+    .pb-modal-title {
+        font-size: 1.1rem;
+    }
+
+    .pb-modal-perf-strip {
+        padding: 12px 16px;
+        gap: 12px;
+    }
+
+    .pb-modal-perf-div {
+        display: none;
+    }
+
+    .pb-modal-body {
+        padding: 16px;
+    }
+
+    .pb-modal-spec-row {
+        grid-template-columns: 110px 1fr;
+    }
+
+    .pb-modal-footer {
+        padding: 12px 16px;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .pb-modal-cta,
+    .pb-modal-cta-outline {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
     }
 }
 /* ── SKELETON LOADING ── */

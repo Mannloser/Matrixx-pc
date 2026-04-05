@@ -498,6 +498,8 @@
 }
 
 /* ── RESPONSIVE ── */
+
+/* Tablet */
 @media (max-width: 900px) {
     .guides-hero {
         padding: 36px 24px 40px;
@@ -505,24 +507,52 @@
 
     .guides-hero-inner {
         grid-template-columns: 1fr;
+        gap: 32px;
     }
 
     .guides-hero-tiers {
-        display: none;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .guides-hero-tier-card {
+        min-width: 0;
+        flex: 1 1 calc(50% - 4px);
     }
 
     .guides-hero-title {
         font-size: 2.2rem;
+        letter-spacing: -1px;
     }
 
     .guides-filter-bar {
         padding: 0 20px;
     }
 
+    /* Stack filter bar vertically */
+    .guides-filter-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+    }
+
+    .guides-filter-tabs {
+        width: 100%;
+        border-bottom: 1px solid var(--sky);
+    }
+
+    .guides-tier-pills {
+        padding: 10px 0;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
     .guides-body {
         padding: 24px 20px 0;
     }
 
+    /* Cards go single column */
     .guide-card-h {
         grid-template-columns: 1fr;
     }
@@ -531,10 +561,122 @@
         min-height: 120px;
     }
 
+    /* Right panel goes horizontal at tablet */
     .guide-card-h-right {
         border-left: none;
         border-top: 1px solid var(--sky);
         flex-direction: row;
         align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .guide-card-h-perf {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 12px 20px;
+    }
+
+    .guide-card-h-bottom {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        flex-wrap: wrap;
+    }
+
+    .guide-card-h-builds {
+        margin-bottom: 0;
+    }
+
+    .guide-card-h-btn {
+        width: auto;
+        padding: 10px 20px;
+        white-space: nowrap;
+    }
+}
+
+/* Mobile */
+@media (max-width: 560px) {
+    .guides-hero {
+        padding: 28px 16px 32px;
+    }
+
+    .guides-hero-title {
+        font-size: 1.9rem;
+        letter-spacing: -0.8px;
+        word-break: break-word;
+        overflow-wrap: break-word;
+    }
+
+    .guides-hero-tiers {
+        display: none; /* too cramped on small phones */
+    }
+
+    .guides-hero-stats {
+        gap: 16px;
+    }
+
+    .guides-hero-stat-val {
+        font-size: 1.3rem;
+    }
+
+    .guides-hero-desc {
+        font-size: 0.88rem;
+    }
+
+    .guides-filter-bar {
+        padding: 0 16px;
+    }
+
+    .guides-filter-tab {
+        padding: 14px 12px;
+        font-size: 0.78rem;
+    }
+
+    .guides-body {
+        padding: 20px 16px 0;
+    }
+
+    .guide-card-h-info {
+        padding: 18px 16px;
+    }
+
+    .guide-card-h-right {
+        padding: 16px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+    }
+
+    .guide-card-h-perf {
+        flex-direction: row;
+        gap: 12px 24px;
+    }
+
+    .guide-card-h-bottom {
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .guide-card-h-btn {
+        width: 100%;
+        padding: 12px 0;
+        font-size: 0.85rem;
+    }
+
+    .guide-card-h-name {
+        font-size: 1.05rem;
+    }
+
+    .guides-tier-pills {
+        gap: 5px;
+    }
+
+    .guides-tier-pill {
+        font-size: 0.68rem;
+        padding: 5px 11px;
     }
 }
