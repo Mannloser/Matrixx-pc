@@ -21,6 +21,14 @@
   background: var(--beige);
   color: var(--navy);
   overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.ap *, .ap *::before, .ap *::after {
+  box-sizing: border-box;
 }
 
 /* ── SHARED ── */
@@ -28,6 +36,8 @@
   max-width: 1100px;
   margin: 0 auto;
   padding: 96px 40px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .ap-eyebrow {
@@ -173,7 +183,9 @@
   border-bottom: 1px solid rgba(47,65,86,0.08);
   position: relative;
   overflow: hidden;
-  padding: 0 40px 0;
+  padding: 0 40px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* huge watermark text */
@@ -201,6 +213,8 @@
   z-index: 1;
   animation: fadeUp 0.6s ease both 0.1s;
   opacity: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .ap-hero-title {
@@ -244,6 +258,9 @@
   z-index: 1;
   animation: fadeUp 0.6s ease both 0.3s;
   opacity: 0;
+  width: 100%;
+  box-sizing: border-box;
+  flex-wrap: wrap;
 }
 
 .ap-stat {
@@ -950,29 +967,103 @@
 /* ─────────────────────────────────────────
    RESPONSIVE
 ───────────────────────────────────────────── */
+
+/* Tablet */
 @media (max-width: 960px) {
-  .ap-story          { grid-template-columns: 1fr; }
-  .ap-quote-card     { position: static; }
-  .ap-features-head  { grid-template-columns: 1fr; }
-  .ap-features-grid  { grid-template-columns: 1fr 1fr; }
-  .ap-why            { grid-template-columns: 1fr; gap: 40px; }
-  .ap-mv-grid        { grid-template-columns: 1fr; }
-  .ap-creator        { grid-template-columns: 1fr; }
-  .ap-creator-left   { flex-direction: row; align-items: center; gap: 20px; }
-  .ap-creator-socials { flex-direction: row; flex-wrap: wrap; }
-  .ap-feedback-inner { grid-template-columns: 1fr; }
-  .ap-feedback-cta   { align-self: flex-start; }
+  .ap-section        { padding: 72px 24px; }
+
+  /* Hero */
+  .ap-hero           { padding: 0 24px; }
+  .ap-hero-inner     { padding: 72px 0 48px; }
+  .ap-hero-title     {
+    letter-spacing: -1.5px;
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+
+  /* Stats bar — 2×2 grid */
   .ap-stats-bar      { flex-wrap: wrap; }
-  .ap-stat           { min-width: 140px; }
+  .ap-stat           { min-width: 45%; flex: 1 1 45%; }
+  .ap-stat-sep       { display: none; }
+  .ap-stat-val       { padding-left: 0; }
+
+  /* Story */
+  .ap-story          { grid-template-columns: 1fr; gap: 40px; }
+  .ap-quote-card     { position: static; }
+
+  /* Features */
+  .ap-features-head  { grid-template-columns: 1fr; gap: 20px; }
+  .ap-features-grid  { grid-template-columns: 1fr 1fr; }
+
+  /* Why */
+  .ap-why            { grid-template-columns: 1fr; gap: 40px; }
+
+  /* Mission/Vision */
+  .ap-mv-grid        { grid-template-columns: 1fr; }
+
+  /* Creator */
+  .ap-creator        { grid-template-columns: 1fr; gap: 32px; }
+  .ap-creator-left   { flex-direction: row; align-items: center; gap: 24px; }
+  .ap-creator-socials { flex-direction: row; flex-wrap: wrap; width: auto; flex: 1; }
+
+  /* Feedback */
+  .ap-feedback-inner { grid-template-columns: 1fr; gap: 28px; }
+  .ap-feedback-cta   { align-self: flex-start; }
 }
 
+/* Mobile */
 @media (max-width: 640px) {
-  .ap-section        { padding: 64px 24px; }
-  .ap-hero-inner     { padding: 80px 0 48px; }
-  .ap-hero-title     { letter-spacing: -1.5px; }
+  .ap-section        { padding: 56px 16px; }
+
+  /* Hero */
+  .ap-hero           { padding: 0 16px; }
+  .ap-hero-inner     { padding: 60px 0 40px; }
+  .ap-hero-title     {
+    letter-spacing: -1px;
+    font-size: clamp(1.6rem, 7vw, 2.4rem);
+    word-break: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
+  }
+  .ap-hero-sub       { font-size: 0.9rem; max-width: 100%; }
+  .ap-hero-ctas      { flex-direction: column; }
+  .ap-btn-primary,
+  .ap-btn-ghost      { width: 100%; justify-content: center; }
+
+  /* Stats bar — single column */
+  .ap-stat           { min-width: 100%; flex: 1 1 100%; border-top: 1px solid rgba(47,65,86,0.07); }
+  .ap-stat:first-child { border-top: none; }
+  .ap-stat-val       { font-size: 1.8rem; }
+
+  /* Features */
   .ap-features-grid  { grid-template-columns: 1fr; }
-  .ap-creator        { padding: 28px 24px; }
-  .ap-creator-left   { flex-direction: column; }
-  .ap-creator-socials { flex-direction: column; }
-  .ap-cta            { padding: 72px 24px; }
+  .ap-feature        { padding: 24px 20px; }
+
+  /* Why benefits */
+  .ap-benefit        { padding: 13px 16px; }
+
+  /* Mission/Vision */
+  .ap-mv-card        { padding: 28px 24px; }
+
+  /* Creator */
+  .ap-creator        { padding: 24px 20px; gap: 24px; }
+  .ap-creator-left   { flex-direction: column; align-items: center; }
+  .ap-creator-socials {
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+  }
+  .ap-creator-social { flex: 1 1 calc(50% - 4px); justify-content: center; }
+  .ap-creator-name   { font-size: 1.4rem; }
+  .ap-creator-name-row { flex-direction: column; align-items: flex-start; gap: 8px; }
+
+  /* Feedback */
+  .ap-feedback-cta   { width: 100%; justify-content: center; }
+
+  /* Bottom CTA */
+  .ap-cta            { padding: 72px 16px; }
+  .ap-cta-btns       { flex-direction: column; align-items: center; }
+  .ap-btn-white,
+  .ap-btn-ghost-light { width: 100%; justify-content: center; }
 }

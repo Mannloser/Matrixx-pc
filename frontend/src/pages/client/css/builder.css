@@ -12,6 +12,9 @@
     background-size: 28px 28px;
     font-family: var(--font-body);
     padding: 40px 0 80px;
+    overflow-x: hidden;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 /* ── HEADER ── */
@@ -298,7 +301,8 @@
     border-radius: 14px;
     border: 1.5px solid var(--sky);
     padding: 22px;
-    width: 350px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .sidebar-card-title {
@@ -715,19 +719,139 @@
 }
 
 /* ── RESPONSIVE ── */
+
+/* Tablet */
 @media (max-width: 860px) {
-    .builder-layout { grid-template-columns: 1fr; }
-    .builder-sidebar { position: static; }
+    .builder-layout {
+        grid-template-columns: 1fr;
+        padding: 0 20px;
+    }
+    .builder-header {
+        padding: 0 20px;
+    }
+    .builder-sidebar {
+        position: static;
+        /* Side-by-side cards on tablet */
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+    }
     .parts-table-head { display: none; }
-    .part-row { grid-template-columns: 160px 1fr 80px 36px; }
-    .modal-wide { max-width: 100%; max-height: 92vh; }
-    .modal-body-layout { grid-template-columns: 160px 1fr; }
+    .part-row {
+        grid-template-columns: 160px 1fr 80px 36px;
+        min-height: 64px;
+    }
+
+    /* Modal full-width, sheet from bottom */
+    .modal-overlay {
+        padding: 0;
+        align-items: flex-end;
+    }
+    .modal-wide {
+        max-width: 100%;
+        max-height: 92vh;
+        border-radius: 18px 18px 0 0;
+        border-bottom: none;
+    }
+    .modal-body-layout {
+        grid-template-columns: 160px 1fr;
+    }
 }
+
+/* Mobile */
 @media (max-width: 560px) {
-    .builder-header { flex-direction: column; align-items: flex-start; }
-    .builder-layout, .builder-header { padding: 0 16px; }
-    .modal-body-layout { grid-template-columns: 1fr; }
-    .modal-filter-sidebar { border-right: none; border-bottom: 1.5px solid var(--sky); max-height: 200px; }
+    .builder-page { padding: 24px 0 60px; }
+
+    .builder-header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0 16px;
+        gap: 14px;
+    }
+    .builder-name { font-size: 1.5rem; }
+    .builder-actions { width: 100%; }
+    .btn-save, .btn-share {
+        flex: 1;
+        text-align: center;
+        justify-content: center;
+    }
+
+    .builder-layout { padding: 0 16px; }
+
+    /* Sidebar stacks single column on small phones */
+    .builder-sidebar {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+    .sidebar-card { padding: 16px; }
+
+    /* Part rows: 2-column layout — category + right side */
+    .part-row {
+        grid-template-columns: 1fr auto;
+        grid-template-rows: auto auto;
+        padding: 12px 14px;
+        min-height: unset;
+        gap: 4px 8px;
+    }
+    .part-cat {
+        grid-column: 1;
+        grid-row: 1;
+    }
+    .part-name-cell {
+        grid-column: 1;
+        grid-row: 2;
+        padding-right: 0;
+    }
+    .part-price {
+        grid-column: 2;
+        grid-row: 1;
+        text-align: right;
+    }
+    .part-remove {
+        grid-column: 2;
+        grid-row: 2;
+        justify-self: end;
+    }
+    .part-cat-icon { width: 30px; height: 30px; font-size: 0.9rem; }
+    .part-cat-label { font-size: 0.78rem; }
+    .part-cat-desc { display: none; }
+
+    /* Modal: stack filters above list */
+    .modal-overlay { padding: 0; align-items: flex-end; }
+    .modal-wide {
+        max-width: 100%;
+        max-height: 94vh;
+        border-radius: 18px 18px 0 0;
+        border-bottom: none;
+    }
+    .modal-body-layout {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
+    }
+    .modal-filter-sidebar {
+        border-right: none;
+        border-bottom: 1.5px solid var(--sky);
+        max-height: 180px;
+        overflow-y: auto;
+        /* Horizontal scrolling filter blocks */
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        gap: 0;
+    }
+    .mfs-block {
+        min-width: 160px;
+        border-bottom: none;
+        border-right: 1px solid var(--sky);
+        flex-shrink: 0;
+    }
+    .mfs-block:last-child { border-right: none; }
+
+    .modal-header { padding: 14px 16px 12px; }
+    .modal-title { font-size: 0.95rem; }
+    .modal-product-list { padding: 8px 10px 12px; }
 }
 
 /* ── COMPATIBILITY ROW HIGHLIGHTS ── */
