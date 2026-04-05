@@ -966,9 +966,21 @@ body {
     .hero {
         grid-template-columns: 1fr;
         min-height: auto;
+        overflow: hidden;
     }
     .hero-right  { display: none; }
-    .hero-left   { padding: 64px 32px; }
+    .hero-left   {
+        padding: 64px 24px 64px 24px;
+        max-width: 100%;
+        overflow: hidden;
+    }
+    .hero-headline {
+        font-size: clamp(2.4rem, 10vw, 3.5rem);
+        letter-spacing: -1.5px;
+        word-break: break-word;
+        overflow-wrap: break-word;
+        max-width: 100%;
+    }
     .section     { padding: 64px 32px; }
     .guides-grid    { grid-template-columns: 1fr; }
     .completed-grid { grid-template-columns: 1fr; }
