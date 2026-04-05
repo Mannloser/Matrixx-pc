@@ -6,26 +6,35 @@ const { getWelcomeEmailHtml } = require("./matrixx-welcome-email");
 
 const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
-    port: 587,        // 👈 IMPORTANT (not 465)
-    secure: false,    // 👈 IMPORTANT
+    port: 587,
+    secure: false,
     auth: {
         user: process.env.MAILING_USER,
         pass: process.env.MAILING_PASS,
     },
+    tls: {
+        rejectUnauthorized: false
+    }
 });
 
-const sendWelcomeEmail = async (email, name) => {  // ✅ accept name
+const sendWelcomeEmail = async (email, name) => {
+    console.log("🚀 EMAIL FUNCTION CALLED for:", email);
+
     try {
+        console.log("📧 Trying to send email...");
+
         await transporter.sendMail({
-            from: `"Matrixx" <${process.env.MAILING_USER}>`,
+            from: process.env.MAILING_USER,
             to: email,
             subject: "Welcome to Matrixx 🖥️",
-            html: getWelcomeEmailHtml(name)  // ✅ pass name
+            html: getWelcomeEmailHtml(name)
         });
 
+        console.log("✅ Email actually sent");
         return true;
+
     } catch (err) {
-        console.log("EMAIL ERROR:", err);
+        console.log("❌ EMAIL ERROR FULL:", err);
         return false;
     }
 };
