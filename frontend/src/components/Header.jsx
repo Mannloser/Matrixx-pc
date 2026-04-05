@@ -5,9 +5,12 @@ import "./css/header.css"; // adjust path if needed
 const Header = () => {
   const [productsOpen, setProductsOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileProductsOpen, setMobileProductsOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   const profileRef = useRef(null);
+  const productsRef = useRef(null);
 
   const token = localStorage.getItem("token");
   const user = (() => {
@@ -17,15 +20,25 @@ const Header = () => {
 
   const isActive = (path) => location.pathname === path;
 
+  // Close profile dropdown on outside click
   useEffect(() => {
     const handler = (e) => {
       if (profileRef.current && !profileRef.current.contains(e.target)) {
         setProfileOpen(false);
       }
+      if (productsRef.current && !productsRef.current.contains(e.target)) {
+        setProductsOpen(false);
+      }
     };
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
   }, []);
+
+  // Close mobile menu on route change
+  useEffect(() => {
+    setMobileMenuOpen(false);
+    setMobileProductsOpen(false);
+  }, [location.pathname]);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -90,6 +103,16 @@ const Header = () => {
       {/* ── TOP NAVBAR ── */}
       <nav className="top-nav">
         <Link to="/" className="logo">Matri<span>xx</span></Link>
+
+        {/* Hamburger (mobile only) */}
+        <button
+          className={`hamburger ${mobileMenuOpen ? "open" : ""}`}
+          onClick={() => setMobileMenuOpen(p => !p)}
+          aria-label="Toggle menu"
+        >
+          <span /><span /><span />
+        </button>
+
         <div className="top-nav-actions">
           {token && user ? (
             <div className="profile-wrap" ref={profileRef}>
@@ -136,7 +159,7 @@ const Header = () => {
         </div>
       </nav>
 
-      {/* ── SEMI NAVBAR ── */}
+      {/* ── SEMI NAVBAR (desktop) ── */}
       <nav className="semi-nav">
 
         {/* Builder */}
@@ -150,11 +173,10 @@ const Header = () => {
         </div>
 
         {/* Products dropdown */}
-        <div className="semi-nav-item">
+        <div className="semi-nav-item" ref={productsRef}>
           <button
             className={`semi-nav-link ${productsOpen ? "active" : ""}`}
             onClick={() => setProductsOpen((prev) => !prev)}
-            onBlur={() => setTimeout(() => setProductsOpen(false), 150)}
           >
             Products
             <span className={`chevron ${productsOpen ? "open" : ""}`} />
@@ -206,6 +228,55 @@ const Header = () => {
         </div>
 
       </nav>
+
+      {/* ── MOBILE DRAWER ── */}
+      {mobileMenuOpen && (
+        <div className="mobile-overlay" onClick={() => setMobileMenuOpen(false)} />
+      )}
+      <div className={`mobile-drawer ${mobileMenuOpen ? "open" : ""}`}>
+        <Link
+          to="/builder"
+          className={`mobile-nav-link ${isActive("/builder") ? "active" : ""}`}
+        >
+          ⚡ Builder
+        </Link>
+
+        {/* Mobile Products accordion */}
+        <div className="mobile-nav-section">
+          <button
+            className={`mobile-nav-link mobile-nav-toggle ${mobileProductsOpen ? "active" : ""}`}
+            onClick={() => setMobileProductsOpen(p => !p)}
+          >
+            Products
+            <span className={`chevron ${mobileProductsOpen ? "open" : ""}`} />
+          </button>
+
+          {mobileProductsOpen && (
+            <div className="mobile-products-list">
+              <div className="mobile-group-label">Core Components</div>
+              <Link to="/products/cpu" className="mobile-product-link"><span>🧠</span> CPUs &amp; Processors</Link>
+              <Link to="/products/gpu" className="mobile-product-link"><span>🎮</span> Graphics Cards</Link>
+              <Link to="/products/motherboard" className="mobile-product-link"><span>🟩</span> Motherboards</Link>
+              <Link to="/products/ram" className="mobile-product-link"><span>💾</span> Memory (RAM)</Link>
+
+              <div className="mobile-group-label" style={{ marginTop: "10px" }}>Storage &amp; Power</div>
+              <Link to="/products/storage" className="mobile-product-link"><span>💿</span> SSDs &amp; HDDs</Link>
+              <Link to="/products/psu" className="mobile-product-link"><span>⚡</span> Power Supplies</Link>
+
+              <div className="mobile-group-label" style={{ marginTop: "10px" }}>Cooling &amp; Case</div>
+              <Link to="/products/cooling" className="mobile-product-link"><span>❄️</span> CPU Coolers</Link>
+              <Link to="/products/case" className="mobile-product-link"><span>🏠</span> PC Cases</Link>
+            </div>
+          )}
+        </div>
+
+        <Link
+          to="/prebuilds"
+          className={`mobile-nav-link ${isActive("/prebuilds") ? "active" : ""}`}
+        >
+          🖥️ Pre-built Systems
+        </Link>
+      </div>
     </>
   );
 };
