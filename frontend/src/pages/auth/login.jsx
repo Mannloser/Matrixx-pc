@@ -88,6 +88,7 @@ export default function LoginPage() {
     try {
       const response = await api.post("/auth/login", { credential, password });
       console.log("Login successful:", response.data);
+      console.log("logged in successfully, received token:", response.data.token);
 
       // Save token AND user data to localStorage
       localStorage.setItem("token", response.data.token);
