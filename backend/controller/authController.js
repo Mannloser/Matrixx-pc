@@ -41,10 +41,8 @@ const registerUser = async (req, res) => {
 
         res.json({ message: "User registered successfully" });
     } catch (err) {
-        console.log("EMAIL ERROR FULL:", err);
-        console.log("MESSAGE:", err.message);
-        console.log("CODE:", err.code);
-        return false;
+        console.log("ERROR:", err);
+        return res.status(500).json({ message: "Registration failed" });
     }
 };
 

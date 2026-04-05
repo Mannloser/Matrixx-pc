@@ -7,6 +7,8 @@ const partsRoutes = require("./routes/partsRoutes.js");
 const profileRoutes = require("./routes/profileRoutes.js");
 const adminRoutes = require("./routes/adminRoutes.js");
 const prebuildRoutes = require("./routes/prebuildRoutes.js");
+const { CommandSucceededEvent } = require("mongodb");
+const { registerUser } = require("./controller/authController.js");
 require("dotenv").config();
 
 app.use(cors({
