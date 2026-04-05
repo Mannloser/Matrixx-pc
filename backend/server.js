@@ -8,7 +8,11 @@ const profileRoutes = require("./routes/profileRoutes.js");
 const adminRoutes = require("./routes/adminRoutes.js");
 require("dotenv").config();
 
-app.use(cors());
+app.use(cors({
+  origin: "https://matrixx-pc.pages.dev",
+  credentials: true
+}));
+
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
