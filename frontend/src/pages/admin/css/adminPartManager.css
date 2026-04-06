@@ -76,6 +76,32 @@
     width: 100%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+    /* Prevent the wrapper itself from overflowing its parent */
+    min-width: 0;
+}
+
+/* Ensure the table never pushes past its container */
+.admin-table {
+    width: 100%;
+    table-layout: fixed;
+    word-break: break-word;
+}
+
+/* Column width hints so fixed layout distributes sensibly */
+.admin-table th:nth-child(1) { width: 48px; }   /* Cat icon */
+.admin-table th:nth-child(2) { width: 22%; }     /* Name */
+.admin-table th:nth-child(3) { width: 14%; }     /* Brand */
+.admin-table th:nth-child(4) { width: auto; }    /* Specs — takes remaining space */
+.admin-table th:nth-child(5) { width: 80px; }    /* Price */
+.admin-table th:nth-child(6) { width: 70px; }    /* Watts */
+.admin-table th:nth-child(7) { width: 130px; }   /* Actions */
+
+/* Specs cell: truncate with ellipsis on desktop so long strings don't blow the layout */
+.admin-table td[data-label="Specs"] {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 0; /* required trick for ellipsis in table-layout:fixed */
 }
 
 .pm-part-icon-cell {
@@ -142,6 +168,13 @@
     }
     .pm-cat-pills::-webkit-scrollbar { display: none; }
     .admin-form-grid-2 { grid-template-columns: 1fr; }
+
+    /* Tighten column widths on tablet so the table stays inside */
+    .admin-table th:nth-child(2) { width: 20%; }
+    .admin-table th:nth-child(3) { width: 12%; }
+    .admin-table th:nth-child(5) { width: 72px; }
+    .admin-table th:nth-child(6) { width: 60px; }
+    .admin-table th:nth-child(7) { width: 110px; }
 }
 
 /* ── MOBILE (≤ 600px) — card layout, zero horizontal scroll ── */
@@ -154,7 +187,11 @@
     }
 
     /* Fully override table layout */
-    .admin-table { display: block !important; width: 100% !important; }
+    .admin-table {
+        display: block !important;
+        width: 100% !important;
+        table-layout: auto !important; /* reset fixed layout — not needed in block mode */
+    }
     .admin-table thead { display: none !important; }
     .admin-table tbody { display: block !important; width: 100% !important; }
 
@@ -185,6 +222,14 @@
         min-width: 0 !important;
         overflow-wrap: break-word;
         word-break: break-word;
+    }
+
+    /* Specs cell: undo desktop truncation so full text wraps in the card */
+    .admin-table tbody td[data-label="Specs"] {
+        overflow: visible !important;
+        text-overflow: clip !important;
+        white-space: normal !important;
+        max-width: none !important;
     }
 
     /* data-label prefix */

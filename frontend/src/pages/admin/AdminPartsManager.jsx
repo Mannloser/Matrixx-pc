@@ -180,7 +180,7 @@ export default function AdminPartsManager() {
                     <td data-label="Brand">
                       <span className="admin-badge admin-badge-gray">{part.brand}</span>
                     </td>
-                    <td data-label="Specs" style={{ color: "var(--teal)", fontSize: "0.75rem" }}>
+                    <td data-label="Specs" style={{ color: "var(--teal)", fontSize: "0.75rem" }} title={specSummary(part)}>
                       {specSummary(part)}
                     </td>
                     <td data-label="Price" style={{ fontFamily: "var(--font-display)", fontWeight: 700 }}>
