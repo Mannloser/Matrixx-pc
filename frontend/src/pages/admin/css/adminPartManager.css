@@ -71,7 +71,13 @@
     border-color: var(--navy);
 }
 
-/* ── TABLE ── */
+/* ── TABLE SCROLL WRAPPER (desktop/tablet only) ── */
+.pm-table-scroll {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
 .pm-part-icon-cell {
     width: 30px;
     height: 30px;
@@ -120,9 +126,8 @@
     margin-bottom: 12px;
 }
 
-/* ── RESPONSIVE: TABLET (≤ 768px) ── */
+/* ── TABLET (≤ 768px) ── */
 @media (max-width: 768px) {
-    /* Toolbar */
     .pm-toolbar {
         flex-direction: column;
         align-items: stretch;
@@ -136,95 +141,97 @@
         scrollbar-width: none;
     }
     .pm-cat-pills::-webkit-scrollbar { display: none; }
-
-    /* Form grid collapses to 1 col */
     .admin-form-grid-2 { grid-template-columns: 1fr; }
-
-    /* Table: hide Specs + Watts columns, keep table layout intact */
-    .admin-table th:nth-child(4),
-    .admin-table td:nth-child(4),
-    .admin-table th:nth-child(6),
-    .admin-table td:nth-child(6) {
-        display: none;
-    }
-
-    /* Tighten cell padding */
-    .admin-table th,
-    .admin-table td {
-        padding: 10px 10px;
-    }
 }
 
-/* ── RESPONSIVE: MOBILE (≤ 600px) ── */
+/* ── MOBILE (≤ 600px) — card layout, zero horizontal scroll ── */
 @media (max-width: 600px) {
-    /* Switch table to card layout */
-    .admin-table thead { display: none; }
 
-    .admin-table,
-    .admin-table tbody,
-    .admin-table tr,
-    .admin-table td {
-        display: block;
-        width: 100%;
+    /* Disable the scroll wrapper in card mode */
+    .pm-table-scroll {
+        overflow: visible !important;
+        width: 100% !important;
     }
 
-    .admin-table tr {
+    /* Fully override table layout */
+    .admin-table { display: block !important; width: 100% !important; }
+    .admin-table thead { display: none !important; }
+    .admin-table tbody { display: block !important; width: 100% !important; }
+
+    /* Each row = card */
+    .admin-table tbody tr {
+        display: block !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        position: relative !important;
         background: var(--white);
-        border: 1px solid var(--admin-border);
-        border-radius: 12px;
-        margin-bottom: 10px;
-        padding: 12px 14px;
-        position: relative;
+        border: 1px solid var(--admin-border) !important;
+        border-radius: 12px !important;
+        margin-bottom: 10px !important;
+        padding: 12px 14px 10px 14px !important;
+        box-shadow: 0 1px 4px rgba(47,65,86,0.06);
     }
 
-    /* Re-show all cells in card mode */
-    .admin-table td {
-        display: flex;
-        align-items: flex-start;
-        gap: 8px;
-        padding: 5px 0;
-        border-bottom: none;
-        font-size: 0.8rem;
+    /* Each cell = flex row */
+    .admin-table tbody td {
+        display: flex !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        align-items: flex-start !important;
+        gap: 8px !important;
+        padding: 4px 0 !important;
+        border: none !important;
+        font-size: 0.82rem !important;
+        min-width: 0 !important;
+        overflow-wrap: break-word;
+        word-break: break-word;
     }
 
-    /* Label each cell using data-label */
-    .admin-table td[data-label]::before {
+    /* data-label prefix */
+    .admin-table tbody td[data-label]::before {
         content: attr(data-label);
         font-size: 0.62rem;
         font-weight: 700;
         letter-spacing: 0.07em;
         text-transform: uppercase;
         color: var(--teal);
-        min-width: 54px;
+        min-width: 52px;
         flex-shrink: 0;
-        padding-top: 2px;
+        padding-top: 3px;
     }
 
-    /* Hide the Cat icon cell label (it has its own icon) */
-    .admin-table td:first-child::before { display: none; }
-    .admin-table td:first-child {
-        position: absolute;
-        top: 12px;
-        right: 14px;
-        width: auto;
-        padding: 0;
+    /* Category icon — absolute top-right of card */
+    .admin-table tbody td:first-child {
+        position: absolute !important;
+        top: 14px !important;
+        right: 14px !important;
+        width: auto !important;
+        padding: 0 !important;
+        border: none !important;
     }
 
-    /* Actions row */
+    /* Actions */
     .pm-actions {
         flex-direction: row;
-        gap: 6px;
         flex-wrap: wrap;
+        gap: 6px;
+        width: 100%;
     }
-
     .pm-actions .admin-btn {
         flex: 1;
         justify-content: center;
+        min-width: 80px;
     }
 }
 
-/* ── RESPONSIVE: SMALL MOBILE (≤ 480px) ── */
+/* ── SMALL MOBILE (≤ 480px) ── */
 @media (max-width: 480px) {
-    .pm-actions { flex-direction: column; gap: 4px; }
-    .pm-actions .admin-btn { width: 100%; justify-content: center; }
+    .pm-actions {
+        flex-direction: column;
+        gap: 4px;
+    }
+    .pm-actions .admin-btn {
+        width: 100%;
+        justify-content: center;
+    }
 }

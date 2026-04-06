@@ -46,7 +46,6 @@ export default function AdminPartsManager() {
   const [loading,      setLoading]      = useState(true);
   const [error,        setError]        = useState("");
 
-  // ── Fetch all parts on load ──
   useEffect(() => {
     api.get("/parts")
       .then(res => setParts(res.data))
@@ -70,7 +69,6 @@ export default function AdminPartsManager() {
   const updSpec  = (key)   => (e) => setForm(f => ({ ...f, specs: { ...f.specs, [key]: e.target.value } }));
   const updCat   = (e) => setForm(makeEmptyForm(e.target.value));
 
-  // ── Add or Edit ──
   const handleSave = async () => {
     if (!form.name.trim() || !form.brand.trim()) return;
 
@@ -94,7 +92,6 @@ export default function AdminPartsManager() {
     }
   };
 
-  // ── Delete ──
   const handleDelete = async () => {
     try {
       await api.delete(`/parts/${deleteTarget._id}`);
@@ -119,7 +116,6 @@ export default function AdminPartsManager() {
 
   return (
     <>
-
       {/* Page header */}
       <div className="admin-page-header">
         <div>
@@ -147,8 +143,11 @@ export default function AdminPartsManager() {
       {/* Table */}
       <div className="admin-card">
         <div className="admin-card-head">
-          <span className="admin-card-title">{filtered.length} part{filtered.length !== 1 ? "s" : ""}{filterCat !== "All" && ` · ${filterCat}`}</span>
+          <span className="admin-card-title">
+            {filtered.length} part{filtered.length !== 1 ? "s" : ""}{filterCat !== "All" && ` · ${filterCat}`}
+          </span>
         </div>
+
         {filtered.length === 0 ? (
           <div className="admin-empty">
             <div className="admin-empty-icon">🔍</div>
@@ -156,39 +155,51 @@ export default function AdminPartsManager() {
             <div className="admin-empty-sub">Try a different search or category</div>
           </div>
         ) : (
-          <table className="admin-table">
-            <thead>
-              <tr>
-                <th>Cat</th>
-                <th>Name</th>
-                <th>Brand</th>
-                <th>Specs</th>
-                <th>Price</th>
-                <th>Watts</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filtered.map(part => (
-                <tr key={part._id}>
-                  <td>
-                    <div className="pm-part-icon-cell">{CAT_ICONS[part.category]}</div>
-                  </td>
-                  <td data-label="Name" style={{ fontWeight: 600 }}>{part.name}</td>
-                  <td data-label="Brand"><span className="admin-badge admin-badge-gray">{part.brand}</span></td>
-                  <td data-label="Specs" style={{ color: "var(--teal)", fontSize: "0.75rem" }}>{specSummary(part)}</td>
-                  <td data-label="Price" style={{ fontFamily: "var(--font-display)", fontWeight: 700 }}>₹{part.price}</td>
-                  <td data-label="Watts" style={{ color: "var(--teal)" }}>{part.watts}W</td>
-                  <td data-label="Actions">
-                    <div className="pm-actions">
-                      <button className="admin-btn admin-btn-ghost" style={{ padding: "5px 10px", fontSize: "0.72rem" }} onClick={() => openEdit(part)}>✏️ Edit</button>
-                      <button className="admin-btn admin-btn-danger" style={{ padding: "5px 10px", fontSize: "0.72rem" }} onClick={() => openDelete(part)}>🗑</button>
-                    </div>
-                  </td>
+          /* ↓ scroll wrapper — clips the table on tablet, becomes invisible on mobile */
+          <div className="pm-table-scroll">
+            <table className="admin-table">
+              <thead>
+                <tr>
+                  <th>Cat</th>
+                  <th>Name</th>
+                  <th>Brand</th>
+                  <th>Specs</th>
+                  <th>Price</th>
+                  <th>Watts</th>
+                  <th>Actions</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {filtered.map(part => (
+                  <tr key={part._id}>
+                    {/* No data-label — floated as icon in card mode */}
+                    <td>
+                      <div className="pm-part-icon-cell">{CAT_ICONS[part.category]}</div>
+                    </td>
+                    <td data-label="Name" style={{ fontWeight: 600 }}>{part.name}</td>
+                    <td data-label="Brand">
+                      <span className="admin-badge admin-badge-gray">{part.brand}</span>
+                    </td>
+                    <td data-label="Specs" style={{ color: "var(--teal)", fontSize: "0.75rem" }}>
+                      {specSummary(part)}
+                    </td>
+                    <td data-label="Price" style={{ fontFamily: "var(--font-display)", fontWeight: 700 }}>
+                      ₹{part.price}
+                    </td>
+                    <td data-label="Watts" style={{ color: "var(--teal)" }}>
+                      {part.watts}W
+                    </td>
+                    <td data-label="Actions">
+                      <div className="pm-actions">
+                        <button className="admin-btn admin-btn-ghost" style={{ padding: "5px 10px", fontSize: "0.72rem" }} onClick={() => openEdit(part)}>✏️ Edit</button>
+                        <button className="admin-btn admin-btn-danger" style={{ padding: "5px 10px", fontSize: "0.72rem" }} onClick={() => openDelete(part)}>🗑</button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         )}
       </div>
 
@@ -204,7 +215,6 @@ export default function AdminPartsManager() {
 
               {error && <div className="admin-error">{error}</div>}
 
-              {/* Category */}
               <div className="admin-form-group">
                 <label className="admin-label">Category</label>
                 <select className="admin-select" value={form.category} onChange={updCat}>
@@ -212,7 +222,6 @@ export default function AdminPartsManager() {
                 </select>
               </div>
 
-              {/* Name + Brand */}
               <div className="admin-form-grid-2">
                 <div className="admin-form-group">
                   <label className="admin-label">Part Name</label>
@@ -224,7 +233,6 @@ export default function AdminPartsManager() {
                 </div>
               </div>
 
-              {/* Series + Tag */}
               <div className="admin-form-grid-2">
                 <div className="admin-form-group">
                   <label className="admin-label">Series</label>
@@ -242,7 +250,6 @@ export default function AdminPartsManager() {
                 </div>
               </div>
 
-              {/* Price + Watts */}
               <div className="admin-form-grid-2">
                 <div className="admin-form-group">
                   <label className="admin-label">Price (₹)</label>
@@ -254,7 +261,6 @@ export default function AdminPartsManager() {
                 </div>
               </div>
 
-              {/* Dynamic Spec Fields */}
               <div className="admin-specs-section">
                 <div className="admin-specs-title">⚙️ {form.category} Specs</div>
                 <div className="admin-form-grid-2">
