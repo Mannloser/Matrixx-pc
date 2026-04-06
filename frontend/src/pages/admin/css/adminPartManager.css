@@ -1,3 +1,4 @@
+/* ── TOOLBAR ── */
 .pm-toolbar {
     display: flex;
     align-items: center;
@@ -70,6 +71,7 @@
     border-color: var(--navy);
 }
 
+/* ── TABLE ── */
 .pm-part-icon-cell {
     width: 30px;
     height: 30px;
@@ -87,6 +89,7 @@
     gap: 6px;
 }
 
+/* ── FORM ── */
 .admin-form-grid-2 {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -116,8 +119,10 @@
     font-size: 0.8rem;
     margin-bottom: 12px;
 }
-/* ── RESPONSIVE ── */
+
+/* ── RESPONSIVE: TABLET (≤ 768px) ── */
 @media (max-width: 768px) {
+    /* Toolbar */
     .pm-toolbar {
         flex-direction: column;
         align-items: stretch;
@@ -131,9 +136,94 @@
         scrollbar-width: none;
     }
     .pm-cat-pills::-webkit-scrollbar { display: none; }
+
+    /* Form grid collapses to 1 col */
     .admin-form-grid-2 { grid-template-columns: 1fr; }
+
+    /* Table: hide Specs + Watts columns, keep table layout intact */
+    .admin-table th:nth-child(4),
+    .admin-table td:nth-child(4),
+    .admin-table th:nth-child(6),
+    .admin-table td:nth-child(6) {
+        display: none;
+    }
+
+    /* Tighten cell padding */
+    .admin-table th,
+    .admin-table td {
+        padding: 10px 10px;
+    }
 }
 
+/* ── RESPONSIVE: MOBILE (≤ 600px) ── */
+@media (max-width: 600px) {
+    /* Switch table to card layout */
+    .admin-table thead { display: none; }
+
+    .admin-table,
+    .admin-table tbody,
+    .admin-table tr,
+    .admin-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .admin-table tr {
+        background: var(--white);
+        border: 1px solid var(--admin-border);
+        border-radius: 12px;
+        margin-bottom: 10px;
+        padding: 12px 14px;
+        position: relative;
+    }
+
+    /* Re-show all cells in card mode */
+    .admin-table td {
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+        padding: 5px 0;
+        border-bottom: none;
+        font-size: 0.8rem;
+    }
+
+    /* Label each cell using data-label */
+    .admin-table td[data-label]::before {
+        content: attr(data-label);
+        font-size: 0.62rem;
+        font-weight: 700;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+        color: var(--teal);
+        min-width: 54px;
+        flex-shrink: 0;
+        padding-top: 2px;
+    }
+
+    /* Hide the Cat icon cell label (it has its own icon) */
+    .admin-table td:first-child::before { display: none; }
+    .admin-table td:first-child {
+        position: absolute;
+        top: 12px;
+        right: 14px;
+        width: auto;
+        padding: 0;
+    }
+
+    /* Actions row */
+    .pm-actions {
+        flex-direction: row;
+        gap: 6px;
+        flex-wrap: wrap;
+    }
+
+    .pm-actions .admin-btn {
+        flex: 1;
+        justify-content: center;
+    }
+}
+
+/* ── RESPONSIVE: SMALL MOBILE (≤ 480px) ── */
 @media (max-width: 480px) {
     .pm-actions { flex-direction: column; gap: 4px; }
     .pm-actions .admin-btn { width: 100%; justify-content: center; }

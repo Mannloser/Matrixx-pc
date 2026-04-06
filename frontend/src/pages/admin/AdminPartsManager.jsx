@@ -158,18 +158,28 @@ export default function AdminPartsManager() {
         ) : (
           <table className="admin-table">
             <thead>
-              <tr><th>Cat</th><th>Name</th><th>Brand</th><th>Specs</th><th>Price</th><th>Watts</th><th>Actions</th></tr>
+              <tr>
+                <th>Cat</th>
+                <th>Name</th>
+                <th>Brand</th>
+                <th>Specs</th>
+                <th>Price</th>
+                <th>Watts</th>
+                <th>Actions</th>
+              </tr>
             </thead>
             <tbody>
               {filtered.map(part => (
                 <tr key={part._id}>
-                  <td><div className="pm-part-icon-cell">{CAT_ICONS[part.category]}</div></td>
-                  <td style={{ fontWeight: 600 }}>{part.name}</td>
-                  <td><span className="admin-badge admin-badge-gray">{part.brand}</span></td>
-                  <td style={{ color: "var(--teal)", fontSize: "0.75rem" }}>{specSummary(part)}</td>
-                  <td style={{ fontFamily: "var(--font-display)", fontWeight: 700 }}>₹{part.price}</td>
-                  <td style={{ color: "var(--teal)" }}>{part.watts}W</td>
                   <td>
+                    <div className="pm-part-icon-cell">{CAT_ICONS[part.category]}</div>
+                  </td>
+                  <td data-label="Name" style={{ fontWeight: 600 }}>{part.name}</td>
+                  <td data-label="Brand"><span className="admin-badge admin-badge-gray">{part.brand}</span></td>
+                  <td data-label="Specs" style={{ color: "var(--teal)", fontSize: "0.75rem" }}>{specSummary(part)}</td>
+                  <td data-label="Price" style={{ fontFamily: "var(--font-display)", fontWeight: 700 }}>₹{part.price}</td>
+                  <td data-label="Watts" style={{ color: "var(--teal)" }}>{part.watts}W</td>
+                  <td data-label="Actions">
                     <div className="pm-actions">
                       <button className="admin-btn admin-btn-ghost" style={{ padding: "5px 10px", fontSize: "0.72rem" }} onClick={() => openEdit(part)}>✏️ Edit</button>
                       <button className="admin-btn admin-btn-danger" style={{ padding: "5px 10px", fontSize: "0.72rem" }} onClick={() => openDelete(part)}>🗑</button>
