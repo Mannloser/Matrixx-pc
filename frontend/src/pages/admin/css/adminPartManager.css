@@ -1,20 +1,37 @@
+/* ════════════════════════════════════════════
+   PARTS MANAGER — adminPartManager.css
+   Strategy: table on desktop, div-cards on mobile.
+   No table→block overrides. No !important wars.
+   ════════════════════════════════════════════ */
+
+/* ── ROOT CONTAINER ── */
+.pm-root {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* ── PAGE HEADER ── */
+.pm-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;          /* wraps button below title on narrow screens */
+}
+
+/* ── TOOLBAR ── */
 .pm-toolbar {
     display: flex;
-    flex-direction: column;
-    align-items: stretch;
+    align-items: center;
     gap: 12px;
     margin-bottom: 20px;
-    width: 100%;
-    max-width: 100%;
-    overflow: hidden;
-    box-sizing: border-box;
+    flex-wrap: wrap;
 }
 
 .pm-search-wrap {
     position: relative;
-    width: 100%;
+    flex: 1 1 180px;          /* grows but never forces a minimum */
     min-width: 0;
-    box-sizing: border-box;
 }
 
 .pm-search-icon {
@@ -40,37 +57,12 @@
     box-sizing: border-box;
     transition: border-color 0.14s;
 }
-
-.pm-search:focus {
-    border-color: var(--teal);
-}
+.pm-search:focus { border-color: var(--teal); }
 
 .pm-cat-pills {
     display: flex;
     gap: 6px;
-    flex-wrap: nowrap;
-    width: 100%;
-    max-width: 100%;
-    overflow-x: auto;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
-    padding-bottom: 6px;
-    box-sizing: border-box;
-}
-
-.pm-cat-pills::-webkit-scrollbar {
-    height: 4px;
-}
-
-.pm-cat-pills::-webkit-scrollbar-track {
-    background: rgba(47, 65, 86, 0.05);
-    border-radius: 10px;
-}
-
-.pm-cat-pills::-webkit-scrollbar-thumb {
-    background: rgba(93, 124, 141, 0.3);
-    border-radius: 10px;
+    flex-wrap: wrap;
 }
 
 .pm-cat-pill {
@@ -85,21 +77,31 @@
     cursor: pointer;
     transition: all 0.13s;
     white-space: nowrap;
-    flex-shrink: 0;
+}
+.pm-cat-pill:hover { border-color: var(--teal); color: var(--navy); }
+.pm-cat-pill.on    { background: var(--navy); color: var(--white); border-color: var(--navy); }
+
+
+/* ════════════════════════════════════════════
+   DESKTOP TABLE  (visible ≥ 601px)
+   ════════════════════════════════════════════ */
+.pm-table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
-.pm-cat-pill:hover {
-    border-color: var(--teal);
-    color: var(--navy);
+.pm-table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
 }
 
-.pm-cat-pill.on {
-    background: var(--navy);
-    color: var(--white);
-    border-color: var(--navy);
-}
+/* Specs column gets leftover space; others are fixed */
+.pm-table colgroup,
+.pm-table th:nth-child(4) { width: auto; }
 
-.pm-part-icon-cell {
+.pm-icon-cell {
     width: 30px;
     height: 30px;
     border-radius: 7px;
@@ -109,15 +111,164 @@
     align-items: center;
     justify-content: center;
     font-size: 0.85rem;
-    flex-shrink: 0;
+}
+
+/* Specs: truncate with ellipsis on desktop */
+.pm-specs-cell {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--teal);
+    font-size: 0.75rem;
+    max-width: 0;            /* required trick for ellipsis in fixed-layout table */
 }
 
 .pm-actions {
     display: flex;
     gap: 6px;
-    flex-wrap: wrap;
 }
 
+.pm-act-btn {
+    padding: 5px 10px !important;
+    font-size: 0.72rem !important;
+}
+
+/* Mobile cards hidden on desktop */
+.pm-cards { display: none; }
+
+
+/* ════════════════════════════════════════════
+   MOBILE CARDS  (≤ 600px)
+   Pure divs — no table CSS at all
+   ════════════════════════════════════════════ */
+@media (max-width: 600px) {
+
+    /* Hide table, show cards */
+    .pm-table-wrap { display: none; }
+    .pm-cards      { display: block; }
+
+    /* Pills: horizontal scroll, no wrap */
+    .pm-cat-pills {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 4px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+    .pm-cat-pills::-webkit-scrollbar { display: none; }
+
+    /* Toolbar stacks vertically */
+    .pm-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    /* ── CARD ── */
+    .pm-card {
+        background: var(--white);
+        border: 1px solid var(--admin-border);
+        border-radius: 12px;
+        padding: 14px;
+        margin-bottom: 10px;
+        box-shadow: 0 1px 4px rgba(47,65,86,0.06);
+        box-sizing: border-box;
+        width: 100%;
+    }
+
+    /* Top row: icon + name/brand */
+    .pm-card-top {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        margin-bottom: 8px;
+    }
+
+    .pm-card-icon {
+        width: 34px;
+        height: 34px;
+        border-radius: 8px;
+        background: var(--beige);
+        border: 1px solid var(--admin-border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        flex-shrink: 0;
+    }
+
+    .pm-card-info {
+        min-width: 0;
+        flex: 1;
+    }
+
+    .pm-card-name {
+        font-weight: 700;
+        font-size: 0.9rem;
+        color: var(--navy);
+        margin-bottom: 4px;
+        word-break: break-word;
+    }
+
+    /* Specs row */
+    .pm-card-specs {
+        font-size: 0.75rem;
+        color: var(--teal);
+        margin-bottom: 10px;
+        line-height: 1.5;
+        word-break: break-word;
+    }
+
+    /* Price + Watts row */
+    .pm-card-meta {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 12px;
+    }
+
+    .pm-card-meta-item {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .pm-card-label {
+        font-size: 0.6rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        color: var(--teal);
+    }
+
+    .pm-card-price {
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 0.95rem;
+        color: var(--navy);
+    }
+
+    .pm-card-watts {
+        font-size: 0.85rem;
+        color: var(--navy);
+    }
+
+    /* Action buttons — full width, side by side */
+    .pm-card-actions {
+        display: flex;
+        gap: 8px;
+    }
+
+    .pm-card-btn {
+        flex: 1;
+        justify-content: center;
+        text-align: center;
+        box-sizing: border-box;
+    }
+}
+
+
+/* ════════════════════════════════════════════
+   FORM / MODAL STYLES
+   ════════════════════════════════════════════ */
 .admin-form-grid-2 {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -148,153 +299,6 @@
     margin-bottom: 12px;
 }
 
-/* ── TABLE WRAPPER FOR RESPONSIVE ── */
-.admin-card {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.admin-table {
-    min-width: 100%;
-    width: 100%;
-}
-
-.admin-table th,
-.admin-table td {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-/* ── RESPONSIVE ── */
-@media (max-width: 1024px) {
-    .admin-table th,
-    .admin-table td {
-        padding: 10px 8px;
-        font-size: 0.75rem;
-    }
-}
-
-@media (max-width: 768px) {
-    .pm-toolbar {
-        flex-direction: column;
-        align-items: stretch;
-        width: 100%;
-        box-sizing: border-box;
-    }
-
-    .pm-search-wrap {
-        width: 100%;
-        box-sizing: border-box;
-    }
-
-    .pm-cat-pills {
-        width: 100%;
-        overflow-x: auto;
-        flex-wrap: nowrap;
-        -webkit-overflow-scrolling: touch;
-        padding-bottom: 8px;
-        scrollbar-width: thin;
-        box-sizing: border-box;
-    }
-
-    .pm-cat-pills::-webkit-scrollbar {
-        height: 6px;
-    }
-
-    .pm-cat-pills::-webkit-scrollbar-thumb {
-        background: rgba(93, 124, 141, 0.4);
-    }
-
-    .pm-actions {
-        flex-wrap: wrap;
-        gap: 5px;
-    }
-
-    .admin-form-grid-2 {
-        grid-template-columns: 1fr;
-    }
-
-    /* Table responsive adjustments */
-    .admin-table th,
-    .admin-table td {
-        padding: 8px 6px;
-        font-size: 0.7rem;
-    }
-
-    .admin-table th:nth-child(4),
-    .admin-table td:nth-child(4) {
-        max-width: 120px;
-    }
-}
-
-@media (max-width: 480px) {
-    .pm-part-icon-cell {
-        width: 20px;
-        height: 20px;
-        font-size: 0.65rem;
-        translate: 3.5px 0px;
-    }
-
-    .pm-cat-pill {
-        font-size: 0.65rem;
-        padding: 4px 8px;
-    }
-
-    .admin-specs-section {
-        margin-top: 12px;
-        padding-top: 10px;
-    }
-
-    /* Extreme mobile table adjustments */
-    .admin-table th,
-    .admin-table td {
-        padding: 4px 2px;
-        font-size: 0.52rem;
-        word-spacing: -2px;
-    }
-
-    /* Center the icon column (first column with category emoji) */
-    .admin-table th:nth-child(1),
-    .admin-table td:nth-child(1) {
-        text-align: center;
-    }
-
-    .admin-btn {
-        padding: 4px 2px;
-        font-size: 0.75rem;
-        gap: 0;
-        min-width: auto;
-        display: inline-flex;
-        flex-wrap: nowrap;
-        align-items: center;
-    }
-
-    /* Hide button text labels on mobile - show only emoji icons */
-    .btn-label {
-        display: none;
-    }
-
-    /* Actions column - keep buttons on one row */
-    .pm-actions {
-        gap: 2px;
-        flex-wrap: nowrap;
-        display: flex;
-        align-items: center;
-        white-space: nowrap;
-    }
-
-    /* Hide non-essential columns on mobile to reduce width */
-    /* Show: Cat, Name, Price, Watts, Actions - Hide: Brand, Specs */
-    .admin-table th:nth-child(3),
-    .admin-table td:nth-child(3) {
-        display: none;
-    }
-
-    .admin-table th:nth-child(4),
-    .admin-table td:nth-child(4) {
-        display: none;
-    }
+@media (max-width: 600px) {
+    .admin-form-grid-2 { grid-template-columns: 1fr; }
 }
