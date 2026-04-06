@@ -71,13 +71,11 @@ export default function AdminPartsManager() {
 
   const handleSave = async () => {
     if (!form.name.trim() || !form.brand.trim()) return;
-
     const cleaned = { ...form, price: +form.price, watts: +form.watts };
     SPEC_FIELDS[form.category]?.forEach(f => {
       if (f.type === "number" && cleaned.specs[f.key] !== undefined)
         cleaned.specs[f.key] = +cleaned.specs[f.key];
     });
-
     try {
       if (modal === "add") {
         const res = await api.post("/parts", cleaned);
@@ -115,9 +113,10 @@ export default function AdminPartsManager() {
   );
 
   return (
-    <div style={{ maxWidth: "100%", overflow: "hidden" }}>
-      {/* Page header */}
-      <div className="admin-page-header">
+    <div className="pm-root">
+
+      {/* ── PAGE HEADER ── */}
+      <div className="admin-page-header pm-header">
         <div>
           <div className="admin-page-title">Parts Manager</div>
           <div className="admin-page-sub">{parts.length} components across {CATEGORIES.length} categories</div>
@@ -125,22 +124,31 @@ export default function AdminPartsManager() {
         <button className="admin-btn admin-btn-primary" onClick={openAdd}>+ Add Part</button>
       </div>
 
-      {/* Toolbar */}
+      {/* ── TOOLBAR ── */}
       <div className="pm-toolbar">
         <div className="pm-search-wrap">
           <span className="pm-search-icon">🔍</span>
-          <input className="pm-search" placeholder="Search by name or brand..." value={search} onChange={e => setSearch(e.target.value)} />
+          <input
+            className="pm-search"
+            placeholder="Search by name or brand..."
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+          />
         </div>
         <div className="pm-cat-pills">
           {["All", ...CATEGORIES].map(cat => (
-            <button key={cat} className={`pm-cat-pill ${filterCat === cat ? "on" : ""}`} onClick={() => setFilterCat(cat)}>
+            <button
+              key={cat}
+              className={`pm-cat-pill ${filterCat === cat ? "on" : ""}`}
+              onClick={() => setFilterCat(cat)}
+            >
               {cat !== "All" && CAT_ICONS[cat] + " "}{cat}
             </button>
           ))}
         </div>
       </div>
 
-      {/* Table */}
+      {/* ── CARD WRAPPER ── */}
       <div className="admin-card">
         <div className="admin-card-head">
           <span className="admin-card-title">
@@ -155,51 +163,76 @@ export default function AdminPartsManager() {
             <div className="admin-empty-sub">Try a different search or category</div>
           </div>
         ) : (
-          /* ↓ scroll wrapper — clips the table on tablet, becomes invisible on mobile */
-          <div className="pm-table-scroll">
-            <table className="admin-table">
-              <thead>
-                <tr>
-                  <th>Cat</th>
-                  <th>Name</th>
-                  <th>Brand</th>
-                  <th>Specs</th>
-                  <th>Price</th>
-                  <th>Watts</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filtered.map(part => (
-                  <tr key={part._id}>
-                    {/* No data-label — floated as icon in card mode */}
-                    <td>
-                      <div className="pm-part-icon-cell">{CAT_ICONS[part.category]}</div>
-                    </td>
-                    <td data-label="Name" style={{ fontWeight: 600 }}>{part.name}</td>
-                    <td data-label="Brand">
-                      <span className="admin-badge admin-badge-gray">{part.brand}</span>
-                    </td>
-                    <td data-label="Specs" style={{ color: "var(--teal)", fontSize: "0.75rem" }} title={specSummary(part)}>
-                      {specSummary(part)}
-                    </td>
-                    <td data-label="Price" style={{ fontFamily: "var(--font-display)", fontWeight: 700 }}>
-                      ₹{part.price}
-                    </td>
-                    <td data-label="Watts" style={{ color: "var(--teal)" }}>
-                      {part.watts}W
-                    </td>
-                    <td data-label="Actions">
-                      <div className="pm-actions">
-                        <button className="admin-btn admin-btn-ghost" style={{ padding: "5px 10px", fontSize: "0.72rem" }} onClick={() => openEdit(part)}>✏️ Edit</button>
-                        <button className="admin-btn admin-btn-danger" style={{ padding: "5px 10px", fontSize: "0.72rem" }} onClick={() => openDelete(part)}>🗑</button>
-                      </div>
-                    </td>
+          <>
+            {/* ── DESKTOP: scrollable table ── */}
+            <div className="pm-table-wrap">
+              <table className="admin-table pm-table">
+                <thead>
+                  <tr>
+                    <th style={{ width: 44 }}></th>
+                    <th>Name</th>
+                    <th>Brand</th>
+                    <th>Specs</th>
+                    <th style={{ width: 88 }}>Price</th>
+                    <th style={{ width: 72 }}>Watts</th>
+                    <th style={{ width: 120 }}>Actions</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                </thead>
+                <tbody>
+                  {filtered.map(part => (
+                    <tr key={part._id}>
+                      <td>
+                        <div className="pm-icon-cell">{CAT_ICONS[part.category]}</div>
+                      </td>
+                      <td style={{ fontWeight: 600 }}>{part.name}</td>
+                      <td><span className="admin-badge admin-badge-gray">{part.brand}</span></td>
+                      <td className="pm-specs-cell" title={specSummary(part)}>{specSummary(part)}</td>
+                      <td style={{ fontFamily: "var(--font-display)", fontWeight: 700 }}>₹{part.price}</td>
+                      <td style={{ color: "var(--teal)" }}>{part.watts}W</td>
+                      <td>
+                        <div className="pm-actions">
+                          <button className="admin-btn admin-btn-ghost pm-act-btn" onClick={() => openEdit(part)}>✏️ Edit</button>
+                          <button className="admin-btn admin-btn-danger pm-act-btn" onClick={() => openDelete(part)}>🗑</button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {/* ── MOBILE: native div cards, zero table CSS ── */}
+            <div className="pm-cards">
+              {filtered.map(part => (
+                <div key={part._id} className="pm-card">
+                  <div className="pm-card-top">
+                    <div className="pm-card-icon">{CAT_ICONS[part.category]}</div>
+                    <div className="pm-card-info">
+                      <div className="pm-card-name">{part.name}</div>
+                      <span className="admin-badge admin-badge-gray">{part.brand}</span>
+                    </div>
+                  </div>
+                  {specSummary(part) && (
+                    <div className="pm-card-specs">{specSummary(part)}</div>
+                  )}
+                  <div className="pm-card-meta">
+                    <div className="pm-card-meta-item">
+                      <span className="pm-card-label">Price</span>
+                      <span className="pm-card-price">₹{part.price}</span>
+                    </div>
+                    <div className="pm-card-meta-item">
+                      <span className="pm-card-label">Power</span>
+                      <span className="pm-card-watts">{part.watts}W</span>
+                    </div>
+                  </div>
+                  <div className="pm-card-actions">
+                    <button className="admin-btn admin-btn-ghost pm-card-btn" onClick={() => openEdit(part)}>✏️ Edit</button>
+                    <button className="admin-btn admin-btn-danger pm-card-btn" onClick={() => openDelete(part)}>🗑 Delete</button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </>
         )}
       </div>
 
@@ -212,7 +245,6 @@ export default function AdminPartsManager() {
               <button className="admin-modal-close" onClick={closeModal}>✕</button>
             </div>
             <div className="admin-modal-body">
-
               {error && <div className="admin-error">{error}</div>}
 
               <div className="admin-form-group">
@@ -278,7 +310,6 @@ export default function AdminPartsManager() {
                   ))}
                 </div>
               </div>
-
             </div>
             <div className="admin-modal-footer">
               <button className="admin-btn admin-btn-ghost" onClick={closeModal}>Cancel</button>
@@ -311,6 +342,7 @@ export default function AdminPartsManager() {
           </div>
         </div>
       )}
+
     </div>
   );
 }
