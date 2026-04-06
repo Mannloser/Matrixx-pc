@@ -115,7 +115,7 @@ export default function AdminPartsManager() {
   );
 
   return (
-    <>
+    <div style={{ maxWidth: "100%", overflow: "hidden" }}>
       {/* Page header */}
       <div className="admin-page-header">
         <div>
@@ -311,6 +311,6 @@ export default function AdminPartsManager() {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 }

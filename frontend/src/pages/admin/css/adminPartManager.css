@@ -1,3 +1,13 @@
+/* ── GLOBAL OVERFLOW GUARD ── */
+/* Prevents ANY child from causing horizontal scroll on the page.
+   This is the single most reliable fix for sideways scroll on mobile. */
+@media (max-width: 600px) {
+    html, body {
+        overflow-x: hidden;
+        max-width: 100%;
+    }
+}
+
 /* ── TOOLBAR ── */
 .pm-toolbar {
     display: flex;
@@ -10,7 +20,7 @@
 .pm-search-wrap {
     position: relative;
     flex: 1;
-    min-width: 200px;
+    min-width: 0; /* never force a minimum — let it shrink to fit */
 }
 
 .pm-search-icon {
@@ -179,6 +189,15 @@
 
 /* ── MOBILE (≤ 600px) — card layout, zero horizontal scroll ── */
 @media (max-width: 600px) {
+
+    /* ── GLOBAL: stop the page body from scrolling sideways ── */
+    /* The page header flex row overflows on small screens */
+    .admin-page-header {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    .admin-page-header > div { flex: 1 1 auto; }
+    .admin-page-header .admin-btn { flex-shrink: 0; align-self: flex-start; }
 
     /* Disable the scroll wrapper in card mode */
     .pm-table-scroll {
