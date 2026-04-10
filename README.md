@@ -1,6 +1,6 @@
 # Matrixx-pc
 
-A full-stack web application built with React and Node.js, featuring user authentication, email support, and a MongoDB database. Deployed live on GitHub Pages.
+PC building web app. Build your custom rig, check compatibility, save to your account, share with others, and browse a pre-built library. Built with React + Vite, Node.js, and MongoDB.
 
 🔗 **Live Demo:** [https://matrixx-pc.pages.dev/](https://matrixx-pc.pages.dev/)
 
