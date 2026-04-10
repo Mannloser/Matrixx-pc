@@ -2,7 +2,7 @@
 
 A full-stack web application built with React and Node.js, featuring user authentication, email support, and a MongoDB database. Deployed live on GitHub Pages.
 
-🔗 **Live Demo:** [mannloser.github.io/Matrixx-pc](https://matrixx-pc.pages.dev/)
+🔗 **Live Demo:** [https://matrixx-pc.pages.dev/](https://matrixx-pc.pages.dev/)
 
 ---
 
