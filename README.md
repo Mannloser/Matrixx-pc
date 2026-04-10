@@ -112,6 +112,6 @@ npm run deploy
 
 ## Author
 
-**Mannloser** — [github.com/Mannloser](https://github.com/Mannloser)
-**Mannloser** — [instagram.com/mannloser](https://instagram.com/mannloser)
-**Mannloser** — [youtube.com/@6ryukkk](https://youtube.com/@6ryukkk)
+- **Mannloser** — [Mannloser](https://github.com/Mannloser)
+- **mannloser** — [@mannloser](https://instagram.com/mannloser)
+- **6ryukkk** — [@6ryukkk](https://youtube.com/@6ryukkk)
