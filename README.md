@@ -22,14 +22,35 @@ PC building web app. Build your custom rig, check compatibility, save to your ac
 
 ---
 
-## Project Structure
+## 📁 Folder Structure
 
 ```
 Matrixx-pc/
-├── frontend/        # React app (Vite)
-├── backend/         # Node.js API server
-├── .env.example     # Environment variable template
-└── package.json     # Root scripts
+├── backend/
+│   ├── config/                  # DB and app configuration
+│   ├── controller/              # Request handlers (auth, user, parts, profile, admin)
+│   ├── middleware/              # Express middleware (auth)
+│   ├── models/                  # Mongoose models (builds, parts, prebuilds, user)
+│   ├── routes/                  # Express route definitions
+│   ├── utils/                   # Helper utilities (email service)
+│   ├── package.json
+│   └── server.js                # Express app entry point
+├── frontend/
+│   ├── public/                  # Static assets
+│   └── src/
+│       ├── api/                 # Client-side API wrappers
+│       ├── components/          # Reusable UI components
+│       ├── pages/               # Route pages (admin side, user side, auth)
+│       ├── App.jsx              # Root React component
+│       ├── main.jsx             # React app entry point
+│       └── index.css            # Global styles
+│   ├── index.html               # HTML entry point
+│   ├── package.json
+│   └── vite.config.js           # Vite configuration
+├── .env.example                 # Environment variable template
+├── .gitignore
+├── package.json                 # Root package (monorepo scripts)
+└── README.md                    # This file
 ```
 
 ---
